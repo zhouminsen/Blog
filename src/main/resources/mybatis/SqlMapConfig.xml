@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybatis主配置,数据源移至spring主配置 -->
+<configuration>
+	<!-- 延迟加载 -->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
+		<!-- 二级缓存 -->
+		<setting name="cacheEnabled" value="true" />
+	</settings>
+	<!-- 批量别名 -->
+	<!-- <typeAliases>
+		<package name="org.java.entity" />
+	</typeAliases> -->
+</configuration>
+
+<!--
+<configuration>
+	<properties resource="mybatis.properties"/>
+	<typeAliases>
+		<typeAlias type="org.java.entity.Inf" alias="f"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="url" value="${url}"/>
+				<property name="driver" value="${driver}"/>
+				<property name="username" value="${user}"/>
+				<property name="password" value="${pwd}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="org/java/entity/InfMapper.xml"/>
+	</mappers>
+</configuration>
+-->
+<!-- 
+jdbc.driver=oracle.jdbc.driver.OracleDriver
+jdbc.url=jdbc:oracle:thin:localhost:1521:orcl
+jdbc.username=zf
+jdbc.password=zf
+
+#jdbc.driver=com.mysql.jdbc.Driver
+#jdbc.url=jdbc:mysql://localhost:3306/bfoa02?characterEncoding=utf-8
+#jdbc.username=root
+#jdbc.password=root
+ -->

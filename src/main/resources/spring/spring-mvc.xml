@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop = "http://www.springframework.org/schema/aop"  
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd  
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context-4.2.xsd  
+                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                        http://www.springframework.org/schema/aop 
+                        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+    <!-- 默认的注解映射的支持 -->
+    <mvc:annotation-driven />
+
+    <!-- 自动扫描该包，扫描指定的包中的类上的注解 -->
+    <context:component-scan base-package="org.java">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+    </bean>
+     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <mvc:annotation-driven>
+		<!-- 处理responseBody 里面日期类型 -->
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="dateFormat">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+							</bean>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+    
+    <!-- 拦截器 start -->
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<!-- 拦截的路径 -->
+    		<mvc:mapping path="/admin/**"/>
+    		<!-- 进入拦截的bean 需要实现 HandlerInterceptor接口-->
+    		<bean class="org.java.base.system.support.interceptor.ServletAPIInterceptor"/>
+    	</mvc:interceptor>
+    </mvc:interceptors>
+    <!-- 拦截器 end -->
+    
+    <!-- shiro注解配置 start  必须配置以下2个bean不然注解不起作用
+    	第二个bean也可以放在shiro.xml中,但是第一个bean必须放在springmvc中,不然注解无效. 
+    	如若开启了<aop:config proxy-target-class="true"/>第一个bean必须注释,不然会报spring不知道代理哪个类-->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" >
+		 <property name="proxyTargetClass" value="true"/>
+	</bean>
+	<!-- 开启shiro注解支持 -->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<!--property注释了也没关系 -->
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+	<!-- 开启aop，对类代理     但是放在applicationContext.xml对shiro注解不起作用-->
+	<!-- <aop:config proxy-target-class="true"></aop:config> -->
+	
+	<!-- shiro注解配置 end-->
+	
+   
+    <!-- 视图解释类,定义跳转的文件的前后缀,视图模式配置 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+        <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 文件大小最大值 -->
+        <property name="maxUploadSize" value="10485760000"/>
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+    
+    <!-- 异常拦截器bean,只要controller中抛出了异常都会进入该类中 -->
+    <bean id="customExceptionResolver" class="org.java.base.exception.interceptor.CustomExceptionResolver"></bean>
+    
+    <!-- 配置异常拦截器start!
+    	这个bean当程序(必须在controller层)抛出异常时拦截下来并跳转到当前异常key所对应的页面.
+    	如若配置了自定义异常拦截器(customExceptionResolver) 这段配置是无效的.
+    	如果发送的的ajax请求的话这一段是无效的(可以进入代码内),但是可以继承SimpleMappingExceptionResolver并重写doResolveException方法即可完成ajax的提示-->
+	<!-- <bean id="customSimpleMappingExceptionResolver" class="org.java.base.exception.interceptor.CustomSimpleMappingExceptionResolver">
+		 设置日志输出级别，不定义则默认不输出警告等错误日志信息     
+         <property name="warnLogCategory" value="WARN"></property>     
+           默认HTTP状态码 当找不到下面mappings中指定的异常对应视图时，使用本默认配置     
+         <property name="defaultStatusCode" value="500"></property>     
+		默认错误页面，当找不到下面mappings中指定的异常对应视图时，使用本默认配置   
+	    <property name="defaultErrorView" value="/unauthorized"></property>  
+	  	  定义异常处理页面用来获取异常信息的变量名，默认名为exception  
+	    <property name="exceptionAttribute" value="ex"></property>  
+	   	 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/unauthorized</prop>
+            </props>
+        </property>
+         <property name="statusCodes">     
+             <props>     
+                 <prop key="errors/error">500</prop>     
+                 <prop key="errors/404">404</prop>     
+             </props>     
+         </property>     
+    </bean> -->
+   <!--配置异常拦截器 end-->
+
+</beans>
