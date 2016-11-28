@@ -102,7 +102,7 @@
 	<bean id="springContextUtil" class="org.java.util.SpringContextUtil"></bean>
 
 	<import resource="classpath:shiro/shiro-application.xml"/>
-	<!--<import resource="classpath:cxf/client-application.xml"/>-->
+	<import resource="classpath:cxf/client-application.xml"/>
 	<import resource="classpath:memCached/memCached-application.xml"/>
 	<import resource="classpath:freemarker/freemarker-application.xml"/>
 	<!-- <import resource="classpath:job/quartz-application.xml"/> -->
