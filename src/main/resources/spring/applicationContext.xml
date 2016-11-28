@@ -100,7 +100,7 @@
 
 	<!-- 获取Spring的ApplicationContext对象的工具类 -->
 	<bean id="springContextUtil" class="org.java.util.SpringContextUtil"></bean>
-
+	dddd
 	<import resource="classpath:shiro/shiro-application.xml"/>
 	<import resource="classpath:cxf/client-application.xml"/>
 	<import resource="classpath:memCached/memCached-application.xml"/>
