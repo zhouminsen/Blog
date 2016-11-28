@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="https://github.com/zhouminsen/Blog.git">
+  <component name="PublishConfigData" serverName="https://github.com/zhouminsen/Blog.git" uploadOnCheckin="114f216c-bb04-4a02-a665-97779eabefa8">
     <serverData>
       <paths name="https://github.com/zhouminsen/Blog.git">
         <serverdata>
@@ -10,5 +10,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myUploadOnCheckinName" value="https://github.com/zhouminsen/Blog.git" />
   </component>
 </project>
