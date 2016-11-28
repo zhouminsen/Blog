@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="114f216c-bb04-4a02-a665-97779eabefa8" name="https://github.com/zhouminsen/Blog.git" url="https://github.com/zhouminsen/Blog.git">
+        <fileTransfer host="https://github.com/zhouminsen/Blog.git" port="21" username="zhouminsen">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
