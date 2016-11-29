@@ -407,14 +407,15 @@
 				</includes>
 			</resource>
 		</resources>
-		<!--指定maven以高版本的jdk进行编译-->
+
 		<plugins>
+			<!--指定maven以高版本的jdk进行编译-->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 		</plugins>
