@@ -1,21 +1,22 @@
 package org.java.util;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import com.danga.MemCached.MemCachedClient;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.danga.MemCached.MemCachedClient;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 /**
  * 缓冲的的session
  * @author 周家伟
  * @date 2016-9-1
  */
 public class CachedSession {
+
 	
 	@Resource
 	private MemCachedClient memCachedClient;
