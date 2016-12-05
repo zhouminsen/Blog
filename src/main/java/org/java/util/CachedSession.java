@@ -16,7 +16,8 @@ import java.util.UUID;
  * @date 2016-9-1
  */
 public class CachedSession {
-
+       
+	   
 	
 	@Resource
 	private MemCachedClient memCachedClient;
