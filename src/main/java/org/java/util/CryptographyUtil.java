@@ -9,7 +9,7 @@ import org.apache.shiro.crypto.hash.Md5Hash;
  */
 public class CryptographyUtil {
 
-	
+
 	/**
 	 * MD5加密
 	 * @param str 要加密的字符串
