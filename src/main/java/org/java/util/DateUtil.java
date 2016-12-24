@@ -1,6 +1,5 @@
 package org.java.util;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,11 +7,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.junit.Test;
-
 /**
  * 日期工具类
- * @author Administrator
+ * @author 周家伟
  *
  */
 public class DateUtil {
@@ -59,7 +56,7 @@ public class DateUtil {
 	}
 	
 	/**
-	 * 把日期字符串转为java.util.Date类型
+	 * 把日期字符串转为java.utils.Date类型
 	 */
 	public static Date strToDate(String dateStr){
 		return strToDate(dateStr,null);
@@ -77,7 +74,7 @@ public class DateUtil {
 		return null;
 	}
 	/**
-	 * 把java.util.Date类型转为日期字符串
+	 * 把java.utils.Date类型转为日期字符串
 	 */
 	public static String dateToStr(Date date){
 		return dateToStr(date,null);
@@ -126,6 +123,117 @@ public class DateUtil {
     	c.set(Calendar.SECOND, 59);
     	return c.getTime();*/
     }
+
+	/**
+	 * 获取当月第一天
+	 * @return
+	 */
+	public static Date getFirstDayOfCurrentMonth(){
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.MONTH, 0);
+		c.set(Calendar.DAY_OF_MONTH,1);
+		c.set(Calendar.HOUR_OF_DAY,	0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		return c.getTime();
+	}
+
+	/**
+	 * 获取当月最后一天
+	 * @return
+	 */
+	public static Date getLastDayOfCuurentMonth(){
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.MONTH, 0);
+		c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+		String dateStr = format.format(c.getTime());
+		try{
+			return strToDate(dateStr+" 23:59:59","yyyy-MM-dd hh:mm:ss");
+		}catch(Exception e){
+			return null;
+		}
+
+    	/*c.set(Calendar.HOUR_OF_DAY, 23);
+    	c.set(Calendar.MINUTE, 59);
+    	c.set(Calendar.SECOND, 59);
+    	return c.getTime();*/
+	}
+
+	/**
+	 * 获取指定日期当月第一天
+	 * @return
+	 */
+	public static Date getFirstDayOfMonthByDate(Date date){
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MONTH, 0);
+		c.set(Calendar.DAY_OF_MONTH,1);
+		c.set(Calendar.HOUR_OF_DAY,	0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		return c.getTime();
+	}
+
+	/**
+	 * 获取指定日期当月最后一天
+	 * @return
+	 */
+	public static Date getLastDayOfMonthByDate(Date date){
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MONTH, 0);
+		c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+		String dateStr = format.format(c.getTime());
+		try{
+			return strToDate(dateStr+" 23:59:59","yyyy-MM-dd hh:mm:ss");
+		}catch(Exception e){
+			return null;
+		}
+
+    	/*c.set(Calendar.HOUR_OF_DAY, 23);
+    	c.set(Calendar.MINUTE, 59);
+    	c.set(Calendar.SECOND, 59);
+    	return c.getTime();*/
+	}
+
+	/**
+	 * 获取向指定日期添加月份的第一天
+	 * @return
+	 */
+	public static Date getFirstDayOfAddMonthByDate(Date date,int month){
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MONTH, month);
+		c.set(Calendar.DAY_OF_MONTH,1);
+		c.set(Calendar.HOUR_OF_DAY,	0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		return c.getTime();
+	}
+
+
+	/**
+	 * 向指定日期添加分钟
+	 * @return
+	 */
+	public static Date addMinuteByDate(Date date,int minute){
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MINUTE, minute);
+		return c.getTime();
+	}
+	/**
+	 * 向当前日期添加分钟
+	 * @return
+	 */
+	public static Date addMinute(int minute){
+		return addMinuteByDate(new Date(),minute);
+	}
+
     
     /**
      * 获取日期的年份
@@ -254,7 +362,7 @@ public class DateUtil {
    /**
     * 指定时间 添加或减少多少月
     * @param date
-    * @param day
+    * @param month
     * @return
     */
    public static Date addMonth(Date date,int month){
@@ -368,4 +476,22 @@ public class DateUtil {
         return c.getTime();
     }
 
+	public static void main(String[] args) {
+		/*Date firstDayOfcurrentMonth = getFirstDayOfCurrentMonth();
+		String str = DateUtil.dateToStr(firstDayOfcurrentMonth);
+		System.out.println(str);*/
+		/*Date date = addMonth(new Date(), -1);
+
+		Date firstDayByDate = getFirstDayOfMonthByDate(date);
+		String str = dateToStr(firstDayByDate);
+		System.out.println(str);*/
+/*
+		String str = dateToStr(getLastDayOfCuurentMonth());
+		System.out.println(str);*/
+		/*String str = dateToStr(getLastDayOfMonthByDate(new Date()));
+		System.out.println(str);*/
+		String str = dateToStr(getFirstDayOfAddMonthByDate(new Date(), 1));
+		System.out.println(str);
+
+	}
 }

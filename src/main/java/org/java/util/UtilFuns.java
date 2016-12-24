@@ -9,7 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-/** UtilFuns is a JavaBean.  */
+/**
+ * 通用工具类
+ * @author 周家伟
+ *
+ */
  public class UtilFuns {
 
 
@@ -386,7 +390,7 @@ import java.util.*;
     if (strStyle.compareTo("")==0){
     	strStyle = "yyyy-MM-dd HH:mm:ss";	//default
     }
-    java.util.Date date=new java.util.Date();
+    Date date=new Date();
     SimpleDateFormat dformat=new SimpleDateFormat(strStyle);
     s = dformat.format(date);
     return s;
@@ -394,7 +398,7 @@ import java.util.*;
 
   static public String sysTime(){
     String s = "";
-    java.util.Date date=new java.util.Date();
+    Date date=new Date();
     SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     s = dformat.format(date);
     return s;
@@ -402,7 +406,7 @@ import java.util.*;
 
   static public String sysDate(){
     String s = "";
-    java.util.Date date=new java.util.Date();
+    Date date=new Date();
     SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");
     s = dformat.format(date);
     return s;
@@ -420,7 +424,7 @@ import java.util.*;
       return false;
     }
   }
-  
+
   public static boolean isNotNull(Object obj){
     try{
       if(obj==null){
@@ -430,7 +434,7 @@ import java.util.*;
     }catch(Exception e){
       return true;
     }
-  }  
+  }
 
   public static boolean isEmpty(String str){
     try{
@@ -442,7 +446,7 @@ import java.util.*;
       return false;
     }
   }
-  
+
   public static boolean isEmpty(String strs[]){
 	  try{
 		  if(strs==null || strs.length<=0){
@@ -475,7 +479,7 @@ import java.util.*;
       return true;
     }
   }
-  
+
   public static boolean isNotEmpty(List obj){
 	  try{
 		  if(obj==null || obj.size()<=0){
@@ -486,7 +490,7 @@ import java.util.*;
 		  return true;
 	  }
   }
-  
+
   /** 功能：用于转换为null的字段。
    * <br>入参：String strvalue 设置要转换的字符串
    * <br>出参：不为“null”的返回原串；为“null”返回""。
@@ -520,7 +524,7 @@ import java.util.*;
       return null;
     }
   }
-    
+
   public static String convertNull(Object o)
   {
     try{
@@ -534,7 +538,7 @@ import java.util.*;
       return "";
     }
   }
-  
+
   //将为null的数据转为0，用在数值的值从数据库中读出的情况
   public static int ConvertZero(Object o)
   {
@@ -549,7 +553,7 @@ import java.util.*;
       return 0;
     }
   }
-  
+
   //将为null的数据转为0，用在数值的值从数据库中读出的情况
   public static int cvtPecrent(Object o)
   {
@@ -563,8 +567,8 @@ import java.util.*;
     }catch(Exception e){
       return 0;
     }
-  }  
-  
+  }
+
   //if 0 then return "";
   public static String FormatZero(Object o)
   {
@@ -579,7 +583,7 @@ import java.util.*;
       return "";
     }
   }
-  
+
   //if 0 then return "";
   public static String FormatZero(String s)
   {
@@ -593,7 +597,7 @@ import java.util.*;
       return "";
     }
   }
-  
+
   //patter="####.000"
   public static String FormatNumber(Object o,String patter)
   {
@@ -609,7 +613,7 @@ import java.util.*;
     }
   }
 
-  
+
   //patter="####.00"
   public static String FormatNumber(String s)
   {
@@ -624,7 +628,7 @@ import java.util.*;
     	return "";
     }
   }
-  
+
   //只用在表格的输出
   public static String ConvertTD(String strvalue)
   {
@@ -654,7 +658,7 @@ import java.util.*;
       return "&nbsp;";
     }
   }
-  
+
  /**
   * 只转中文，不处理null
        读取记录时去掉数据两边的空格；而录入数据时，维持用户的输入，哪怕用户多输入了空格
@@ -669,7 +673,7 @@ import java.util.*;
       if(strvalue==null){
         return "null";
       }else if(strvalue.length()==0){
-        return "";      
+        return "";
       }else{
         strvalue = new String(strvalue.getBytes("ISO8859_1"), "GB2312");
         return strvalue;
@@ -678,7 +682,7 @@ import java.util.*;
       return "";
     }
   }
-  
+
   public static String ConvertCStr(String strvalue)
   {
     try{
@@ -711,7 +715,7 @@ import java.util.*;
       return "";
     }
   }
-  
+
   /**
    *UrlEncoder 进行URL编码
    */
@@ -751,7 +755,7 @@ import java.util.*;
         }
         return s1;
     }
-    
+
   /**
    * 将字符串转化成首字母大写，其余字母小写的格式
    * @param source 传入字符串
@@ -767,7 +771,7 @@ import java.util.*;
     a = a.toUpperCase();
     return a + source.substring(1);
   }
-  
+
    /**
    * 将字符串转换成Long型
    * @param param 传入字符串
@@ -852,7 +856,7 @@ import java.util.*;
 	    }
 	    return null;
 	}
-	
+
 	/**
 	 * 如果转换异常默认以HH:mm:ss格式输出 时:分:秒
 	 * @param currDate 时间格式字符串
@@ -872,7 +876,7 @@ import java.util.*;
 	    }
 	    return null;
 	}
-	
+
 	/**
 	 * 如果转换异常默认以yyyy-MM-dd HH:mm:ss格式输出 年-月-日  时:分:秒
 	 * @param currDate 时间格式字符串
@@ -892,7 +896,7 @@ import java.util.*;
 	    }
 	    return null;
 	}
-	
+
   /**
    * 将字符串转换成Double型
    * @param param 传入字符串
@@ -911,7 +915,7 @@ import java.util.*;
 
  /**
   * s是否存在ArrayList中，存在返回数组下标(equals判断)，不存在返回-1
-  * @param s 
+  * @param s
   * @param aList
   * @return
   */
@@ -935,14 +939,14 @@ import java.util.*;
   public static int existElements(String str,String[] array) {
     try{
       for (int i = 0; i < array.length; i ++) {
-        if (str.compareTo((array[i].trim()))==0){  
+        if (str.compareTo((array[i].trim()))==0){
           return i;
         }
       }
     }catch(Exception e){   }
     return -1;
   }
-  
+
   /**
    * 判断对象o是否存在于set对象集合中 create by tony 20090611
    * @param o
@@ -963,7 +967,7 @@ import java.util.*;
 	}
 
   /**
-   * 
+   *
    * @param s
    * @param aList
    * @return
@@ -980,7 +984,7 @@ import java.util.*;
     }catch(Exception e){   }
     return -1;
   }
-  
+
   /**
    * 将ArrayList转换为一维String数组，并把其中的null换成空字符串
    * @param aList 传入的Arraylist
@@ -992,8 +996,8 @@ import java.util.*;
     }
     return s;
   }
-  
-  
+
+
   /**
    * 将数组中的null换成空字符串
    * @param al 传入的Arraylist，同时也是输出结果
@@ -1047,7 +1051,7 @@ import java.util.*;
         return "";
       }
     }
-    
+
     /** ComboList 功能：选定在下拉列表框中与查找到数据,相符的那一项内容
      * <br>输入参数：String CurrentValue 查找出的数据库中的数据
      *               String[] values  需要输出的所有下拉列表框的内容所对应的值
@@ -1101,8 +1105,8 @@ import java.util.*;
       }catch(Exception e){
         return "";
       }
-    } 
-    
+    }
+
   /** StrToTimestamp 功能：将字符串转换为Timestamp 。
    * <br>输入参数：String timestampStr 设置要转换的字符串
    *              String pattern 要转换的format
@@ -1112,7 +1116,7 @@ import java.util.*;
    * <br>时间：2003-8-26
    */
   public static Timestamp StrToTimestamp(String timestampStr,String pattern) throws ParseException {
-    java.util.Date date = null;
+    Date date = null;
     SimpleDateFormat format = new SimpleDateFormat(pattern);
     try {
       date = format.parse(timestampStr);
@@ -1549,16 +1553,28 @@ public static String getQQString( String strvalue ) {
      * @param max 最大值
      * @return
      */
-    public int getScopeRandom(int min,int max) {
+    public static int getScopeRandom(int min,int max) {
         int r=(int) (Math.random()*(max-min+1)+min);
         return r;
     }
-	
-  public static void main(String[] args) throws Exception {
+
+    /**
+     * 如果传入的num为null则给默认值0
+     * @param num
+     * @return
+     */
+    public static Long isNullOfDefalut(Long num) {
+        if (num==null) {
+            num = 0L;
+        }
+        return num;
+    }
+
+    public static void main(String[] args) throws Exception {
 
 //	  
 //	  
-//	  java.util.List aList = new ArrayList();
+//	  java.utils.List aList = new ArrayList();
 //	  System.out.println(UtilFuns.isNotEmpty(aList));
 //	  
 //	  System.out.println(uf.formatDateTimeCN("2011"));

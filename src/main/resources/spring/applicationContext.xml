@@ -59,7 +59,7 @@
 		<!-- mybatis全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
 		<!-- 自动扫描mapping.xml文件 -->
-		 <!--<property name="mapperLocations" value="classpath:org/java/deal/**/dao/*.xml"></property>-->
+		 <property name="mapperLocations" value="classpath:org/java/deal/**/dao/*.xml"></property>
 	</bean>
 	<!-- 使用mapper自动扫描器 自动将mapper包中的sqlmapper扫描出来，注册到spring容器中(必须同包) -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -71,9 +71,9 @@
 
 	<!-- 事务管理 start -->
 	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+				 class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource" />
+</bean>
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<!-- 由于spring的事务回滚只对runtimeException有效,所以在这里指明对Exception也生效 -->
