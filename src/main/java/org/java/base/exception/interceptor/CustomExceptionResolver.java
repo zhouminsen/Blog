@@ -107,7 +107,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 	
 	/**
 	 * 获得当前操作人对那个模块进行了具体操作
-	 * @param args 参数名称
+	 * @param object 参数名称
 	 * @param typeName 操作类型
 	 * @return
 	 */

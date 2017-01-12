@@ -28,7 +28,7 @@
 		</constructor-arg>
 		<property name="servers">
 			<list>
-				<value>127.0.0.1:11211</value>
+				<value>192.168.2.181:11211</value>
 			</list>
 		</property>
 		<property name="weights">
@@ -70,7 +70,7 @@
 	</aop:config>
 	
 	<!-- 配置缓存服务器 -->
-	<bean  id="cachedSession" class="org.java.util.CachedSession">
+	<bean  id="cachedSession" class="org.java.base.session.CachedSession">
 		<property name="expiry" value="6000"></property>
 	</bean>
 	
