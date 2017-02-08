@@ -28,7 +28,7 @@
 		</constructor-arg>
 		<property name="servers">
 			<list>
-				<value>192.168.2.181:11211</value>
+				<value>${mc.servers}</value>
 			</list>
 		</property>
 		<property name="weights">
@@ -37,19 +37,19 @@
 			</list>
 		</property>
 		<property name="initConn">  
-            <value>20</value>  
+            <value>${mc.initConn}</value>
         </property>  
         <property name="minConn">  
-            <value>10</value>  
+            <value>${mc.minConn}</value>
         </property>  
         <property name="maxConn">  
-            <value>50</value>  
+            <value>${mc.maxConn}</value>
         </property>  
         <property name="nagle">  
-            <value>false</value>  
+            <value>${mc.nagle}</value>
         </property>  
         <property name="socketTO">  
-            <value>3000</value>  
+            <value>${mc.socketTO}</value>
         </property>  
 	</bean>
 	
@@ -71,7 +71,7 @@
 	
 	<!-- 配置缓存服务器 -->
 	<bean  id="cachedSession" class="org.java.base.session.CachedSession">
-		<property name="expiry" value="6000"></property>
+		<property name="expiry" value="${mc.expiry}"></property>
 	</bean>
 	
 </beans>

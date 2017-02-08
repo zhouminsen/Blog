@@ -30,7 +30,6 @@ public class LoginController extends BaseController{
 	@Resource
 	private LogLoginService logLoginService;
 	/**
-	 * @param request
 	 * @param logLogin
 	 * @return
 	 * @throws Exception

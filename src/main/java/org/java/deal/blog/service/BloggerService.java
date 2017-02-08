@@ -25,9 +25,10 @@ public interface BloggerService {
 	/**
 	 * 修改用户
 	 * @param blogger
-	 * @return
+	 * @param isChangePic
+     * @return
 	 */
-	int modify(Blogger blogger);
+	int modify(Blogger blogger, Integer isChangePic);
 	
 	/**
 	 * 从imageServer里获得上传图片的权限

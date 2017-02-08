@@ -128,6 +128,7 @@ $(function(){
 				return "background:orange";
 			}
 		},
+
 		toolbar:[
 		   {text:"新增",iconCls:"icon-add",handler:function(){
 			   if(flag){

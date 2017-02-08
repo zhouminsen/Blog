@@ -115,6 +115,11 @@
 	function downloadLog(){
 		location.href="${cxt}/admin/log/login/downloadLog.shtml";
 	}
+
+	// 下载Log4j文件
+	function downImage(){
+		location.href="${cxt}/admin/log/login/downImage.shtml";
+	}
 </script>
     </head>
  
@@ -147,6 +152,7 @@
 		<a  clazz="easyui-linkbutton" onClick="downloadLog()"   class="easyui-linkbutton"      iconCls="icon-edit" >后台日志下载</a>
 		<a  clazz="easyui-linkbutton" onClick="manualBackup()"    class="easyui-linkbutton"      iconCls="icon-remove" >手动备份</a>
 		<a  clazz="easyui-linkbutton" onClick="downloadLogBus()"  class="easyui-linkbutton"      iconCls="icon-edit" >备份下载</a>
+		<a  clazz="easyui-linkbutton" onClick="downImage()"  class="easyui-linkbutton"      iconCls="icon-edit" >下载图片</a>
 	</div>
 	<div class="updownInterval"> </div>
 	<div>

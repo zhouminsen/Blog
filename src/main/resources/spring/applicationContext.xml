@@ -32,6 +32,7 @@
 			<list>
 				<value>classpath:jdbc.properties</value>
 				<value>classpath:memCached.properties</value>
+				<value>classpath:ftp.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -60,6 +61,20 @@
 		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
 		<!-- 自动扫描mapping.xml文件 -->
 		 <property name="mapperLocations" value="classpath:org/java/deal/**/dao/*.xml"></property>
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<!--使用下面的方式配置参数，一行配置一个 -->
+						<value>
+							helperDialect=mysql
+							supportMethodsArguments=true
+							rowBoundsWithCount=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
 	</bean>
 	<!-- 使用mapper自动扫描器 自动将mapper包中的sqlmapper扫描出来，注册到spring容器中(必须同包) -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -100,6 +115,15 @@
 
 	<!-- 获取Spring的ApplicationContext对象的工具类 -->
 	<bean id="springContextUtil" class="org.java.util.SpringContextUtil"></bean>
+	<bean id="ftp" class="org.java.util.FTPUtil">
+		<property name="FtpHost" value="${ftp.Host}"></property>
+		<property name="FtpPort" value="${ftp.Port}"></property>
+		<property name="ftpUserName" value="${ftp.User}"></property>
+		<property name="FtpPassword" value="${ftp.Password}"></property>
+		<property name="FtpPathname" value="${ftp.Pathname}"></property>
+	</bean>
+
+
 	<import resource="classpath:shiro/shiro-application.xml"/>
 	<import resource="classpath:cxf/client-application.xml"/>
 	<import resource="classpath:memCached/memCached-application.xml"/>

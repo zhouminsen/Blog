@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.java.base.common.entity.BaseEntity;
 import org.java.base.system.SystemConfig;
+import org.java.base.system.UserConstant;
 
 /**
  * 
@@ -41,7 +42,7 @@ public class Blogger extends BaseEntity {
      * @return
      */
     public String getSubAllUrl() {
-		return SystemConfig.getString("imageServer_userImage")+"/"+subImageName;
+		return UserConstant.USER_IMAGE_ADDR+"/"+username+"/"+subImageName;
 	}
 
     public Integer getId() {
