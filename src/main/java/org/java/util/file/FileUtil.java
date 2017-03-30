@@ -21,7 +21,9 @@ import java.util.List;
 import org.java.util.FormatStyle;
 import org.java.util.UtilFuns;
 
-
+/**
+ * @author 周家伟 2015-07-01
+ */
 public class FileUtil {
 
   /* ======================================== *

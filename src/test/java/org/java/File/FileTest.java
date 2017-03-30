@@ -1,19 +1,17 @@
 package org.java.File;
 
-import java.io.*;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.java.base.common.test.BaseTest;
 import org.java.base.system.SystemConfig;
-import org.java.base.system.UserConstant;
 import org.java.util.FTPUtil;
-import org.java.util.file.DownloadUtil;
+import org.java.util.file.ExportExcelUtil;
 import org.java.util.file.FileUtil;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileTest extends BaseTest {
 
@@ -88,6 +86,21 @@ public class FileTest extends BaseTest {
         if (ftp.isConnected()) {
             ftp.disconnect();
         }
+    }
+
+    @Test
+    public void  exportExcel() throws Exception {
+        OutputStream os = new FileOutputStream("C:\\Users\\zhoum\\Desktop\\bb.xls");
+        String titles[] = {"呵呵", "哈哈"};
+        List<String[]> bodyRow = new ArrayList<>();
+        String[] contents = {"你说什么","我听不到","呵呵呵","你去啊"};
+        for (int i = 0; i <4 ; i++) {
+            bodyRow.add(contents);
+        }
+        ExportExcelUtil.createExcel(os, "bb", "cc",titles, bodyRow);
+        os.flush();
+        os.close();
+//        SortedMap sortedMap
     }
 
 }

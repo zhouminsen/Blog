@@ -42,24 +42,7 @@ public class LoginController extends BaseController{
 			token.setRememberMe(true);
 		}
 		SecurityUtils.getSubject().login(token);
-		/*****************************************************************/
-        String timeStr=logLogin.getUsername()+System.currentTimeMillis();
-        JVMCache.map.put(timeStr, logLogin.getUsername());
-        Cookie c=new Cookie("sso", timeStr);
-        c.setPath("/");
-        response.addCookie(c);
-        String service=request.getParameter("service");
-		if (UtilFuns.isNotEmpty(service)) {
-			StringBuilder sb = new StringBuilder(service);
-			if (0 <= service.indexOf("?")) {
-				sb.append("&");
-			} else {
-				sb.append("?");
-			}
-			sb.append("ticket=").append(timeStr);
-			return "redirect:"+sb;
-		}
-		return "redirect:/admin/first.shtml";
+		return "forward:/admin/first.shtml";
 	}
 	
 	/**

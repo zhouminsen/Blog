@@ -7,7 +7,7 @@ public class UserConstant {
     /**
      * 用户图片读取路径
      */
-    public static final String USER_IMAGE_ADDR = "ftp://192.168.134.131/image";
+    public static final String USER_IMAGE_ADDR = "ftp://192.168.134.134/image";
 
     /**
      * 用户图片存储路径

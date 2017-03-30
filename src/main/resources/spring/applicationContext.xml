@@ -32,6 +32,7 @@
 			<list>
 				<value>classpath:jdbc.properties</value>
 				<value>classpath:memCached.properties</value>
+				<value>classpath:redis.properties</value>
 				<value>classpath:ftp.properties</value>
 			</list>
 		</property>
@@ -126,7 +127,8 @@
 
 	<import resource="classpath:shiro/shiro-application.xml"/>
 	<import resource="classpath:cxf/client-application.xml"/>
-	<import resource="classpath:memCached/memCached-application.xml"/>
+	<!--<import resource="classpath:memCached/memCached-application.xml"/>-->
+	<import resource="classpath:redis/redis-application.xml"/>
 	<import resource="classpath:freemarker/freemarker-application.xml"/>
 	<!-- <import resource="classpath:job/quartz-application.xml"/> -->
 

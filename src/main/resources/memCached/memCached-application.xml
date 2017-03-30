@@ -12,7 +12,9 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
-		
+
+	<!-- memCached配置文件 -->
+	<context:property-placeholder location="classpath*:/memCached.properties" ignore-unresolvable="true" />
 	<!-- 配置客户端 -->
 	<bean id="memCachedClient" class="com.danga.MemCached.MemCachedClient">
 		<constructor-arg>

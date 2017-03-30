@@ -319,15 +319,16 @@ public class ExportExcelUtil {
 	
 	/**
 	 * poi创建excel
-	 * @param fileName 文件名称
+	 * @param os 输出流
+	 * @param sheetName 工作薄名称
 	 * @param brow     页眉
 	 * @param titleRow 标题行
 	 * @param bodyRow  主体内容
 	 */
-	public static void createExcel(OutputStream os ,String fileName,String brow,String[] titleRow,List<String[]> bodyRow) {
+	public static void createExcel(OutputStream os ,String sheetName,String brow,String[] titleRow,List<String[]> bodyRow) {
 		try {
 			HSSFWorkbook wb = new HSSFWorkbook();//创建工作簿
-			HSSFSheet sheet = wb.createSheet("操作记录备份");//第一个sheet
+			HSSFSheet sheet = wb.createSheet(sheetName);//第一个sheet
 			HSSFRow rowFirst = sheet.createRow(0);//第一个sheet第一行为标题
 			rowFirst.setHeight((short) 500);
 			for (int i = 0; i < titleRow.length; i++) {
@@ -354,6 +355,7 @@ public class ExportExcelUtil {
 				}
 			}
 			wb.write(os);
+			os.flush();
 			os.close();
 			} catch (Exception e) {
 				e.printStackTrace();

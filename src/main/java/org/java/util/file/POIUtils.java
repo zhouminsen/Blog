@@ -376,5 +376,71 @@ public class POIUtils {
 		}
 		return headers;
 	}
-	
+	@SuppressWarnings("rawtypes")
+	public HSSFWorkbook handleDataToExcel(List list,List<ExcelHeader> headers,String sheetName,int pageSize) throws Exception{
+
+		HSSFWorkbook workbook = null;
+		workbook = new HSSFWorkbook();
+		// 获取Excel标题
+		//
+		if(null != list && list.size() > 0 ){
+			int sheetCount = list.size() % pageSize == 0 ? list.size() / pageSize : list.size() / pageSize + 1;
+			for(int i = 1; i <= sheetCount; i++){
+				HSSFSheet sheet = null;
+				if(!StringUtils.isEmpty(sheetName)){
+					sheet = workbook.createSheet(sheetName + i);
+				}else{
+					sheet = workbook.createSheet();
+				}
+
+				HSSFRow row = sheet.createRow(0);
+				// 写标题
+				CellStyle titleStyle = setCellStyle(workbook,position_title);
+				for(int j = 0; j < headers.size();j++){
+					HSSFCell cell = row.createCell(j);
+					cell.setCellStyle(titleStyle);
+					cell.setCellValue(headers.get(j).getTitle());
+					sheet.setColumnWidth(j, headers.get(j).getWidth()*256);
+				}
+
+				// 写内容
+				Object obj = null;
+				CellStyle bodyStyle = setCellStyle(workbook, position_body);
+				int begin = (i - 1) * pageSize;
+				int end = (begin + pageSize) > list.size() ? list.size() : (begin + pageSize);
+				int rowCount = 1;
+				for(int n = begin; n < end; n++){
+					row = sheet.createRow(rowCount);
+					rowCount++;
+					obj = list.get(n);
+					for(int x = 0; x < headers.size(); x++){
+						Cell cell = row.createCell(x);
+						cell.setCellStyle(bodyStyle);
+						/*Method method = clazz.getDeclaredMethod(headers.get(x).getMethodName());
+						Object value = method.invoke(obj);
+						if(value instanceof Date){
+							SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							String formattedDate = dateFormat.format(new Date());
+							cell.setCellValue((String)formattedDate);
+						}else if(value instanceof Double){
+							cell.setCellValue((Double)value);
+						}else if(value instanceof String){
+							cell.setCellValue((String)value);
+							*//*if(((String)value).trim().length()>0 && isNumeric((String)value)){
+								cell.setCellType(Cell.CELL_TYPE_STRING);
+								cell.setCellValue((String)value);
+							}else{
+							}*//*
+						}else if(value instanceof Integer){
+							cell.setCellValue((Integer) value);
+						}*/
+						cell.setCellValue("bb");
+
+//						cell.setCellValue(org.apache.commons.beanutils.BeanUtils.getProperty(obj,getPropertyName(headers.get(x))));
+					}
+				}
+			}
+		}
+		return workbook;
+	}
 }

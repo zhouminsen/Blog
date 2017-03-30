@@ -57,6 +57,7 @@ public class ServletAPI implements ServletContextListener{
 	}
 	
 	public void contextInitialized(ServletContextEvent sce) {
+
 		servletContext=sce.getServletContext();
 	}
 

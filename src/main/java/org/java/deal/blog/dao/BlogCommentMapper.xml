@@ -22,7 +22,7 @@
   <select id="selectByCondition" resultMap="BaseResultMap" parameterType="map" >
 	select  
 	<include refid="Base_Column_List"/>
-	from blog_Comment
+	from blog_comment
 	<where>
 		blogId=#{blogId}
 	</where> 
@@ -65,7 +65,7 @@
   <select id="selectByBlogId" resultMap="BaseResultMap" parameterType="int" >
 	select  
 	<include refid="Base_Column_List"/>
-	from blog_Comment
+	from blog_comment
 	where 
 	blogId=#{blogId}
 	AND deleteFlag=1
@@ -74,11 +74,11 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from blog_Comment
+    from blog_comment
     where id = #{id,jdbcType=INTEGER}
   </select>
   <update id="deleteLogicBatch">
-  	UPDATE  blog_comment SET deleteFlag=0 
+  	UPDATE  blog_comment SET deleteFlag=0
   	where deleteFlag=1 
   	AND id IN
   	<foreach collection="array" item="id" open="(" close=")" separator="," >
@@ -86,11 +86,11 @@
   	</foreach> 
   </update>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from blog_Comment
+    delete from blog_comment
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.java.deal.blog.entity.BlogComment" >
-    insert into blog_Comment (id, userIp, blogId, 
+    insert into blog_comment (id, userIp, blogId,
       content, commentDate, state
       )
     values (#{id,jdbcType=INTEGER}, #{userIp,jdbcType=VARCHAR}, #{blogId,jdbcType=INTEGER}, 
@@ -98,7 +98,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="org.java.deal.blog.entity.BlogComment" >
-    insert into blog_Comment
+    insert into blog_comment
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -141,7 +141,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="org.java.deal.blog.entity.BlogComment" >
-    update blog_Comment
+    update blog_comment
     <set >
       <if test="userIp != null" >
         userIp = #{userIp,jdbcType=VARCHAR},
@@ -162,7 +162,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.java.deal.blog.entity.BlogComment" >
-    update blog_Comment
+    update blog_comment
     set userIp = #{userIp,jdbcType=VARCHAR},
       blogId = #{blogId,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
@@ -170,4 +170,6 @@
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="selectByBlogIdbb" parameterType="map"></select>
 </mapper>

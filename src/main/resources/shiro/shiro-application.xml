@@ -106,24 +106,23 @@
     <!-- <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml" />
     </bean> -->
-    <!--
-    <bean id="shiroCachedManager" class="org.java.base.cached.ShiroCachedManager">
-        <property name="simpleCacheManager" ref="simpleCachedManager"></property>
-    </bean>
 
-    <bean id="simpleCachedManager" class="org.java.base.cached.SimpleCachedManagerImpl">
-        <constructor-arg ref="memCachedClient"/>
-    </bean>
- -->
+    <!--<bean id="memcachedSessionDao" class="org.java.base.session.MemcachedSessionDao">-->
+        <!--<constructor-arg ref="memCachedClient"></constructor-arg>-->
+    <!--</bean>-->
+
     <!-- 3会话管理器 -->
     <bean id="sessionManager"
           class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!--<property name="sessionDAO" ref="memcachedSessionDao"></property>-->
         <!-- session的失效时长，单位毫秒 -->
         <property name="globalSessionTimeout" value="600000"/>
         <!-- 删除失效的session -->
         <property name="deleteInvalidSessions" value="true"/>
         <!-- 定时检查失效的session -->
         <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <!--<property name="sessionIdCookie.name" value="managerid1"/>-->
+        <property name="sessionIdCookie.path" value="/"/>
     </bean>
 
     <!-- 记住我cookie -->

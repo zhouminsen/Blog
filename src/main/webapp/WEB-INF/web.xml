@@ -6,6 +6,7 @@
 
 	<!-- 应用的名称 -->
 	<display-name>zhoujiaweiBlog</display-name>
+	<distributable/>
 	<!-- 应用描述 -->
 	<description>博客服务系统</description>
 

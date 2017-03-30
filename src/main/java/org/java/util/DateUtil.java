@@ -17,6 +17,11 @@ public class DateUtil {
 	 * 默认时间显示格式
 	 */
 	public static final String DEFAULTPATTERN = "yyyy-MM-dd";
+
+	/**
+	 * 普通格式"yyyy-MM"
+	 */
+	public static final String  YYYYMM= "yyyy-MM";
 	/**
 	 * 普通格式,显示为:年-月-日 时:分:秒
 	 */
@@ -56,7 +61,7 @@ public class DateUtil {
 	}
 	
 	/**
-	 * 把日期字符串转为java.util.Date类型
+	 * 把日期字符串转为java.utils.Date类型
 	 */
 	public static Date strToDate(String dateStr){
 		return strToDate(dateStr,null);
@@ -74,7 +79,7 @@ public class DateUtil {
 		return null;
 	}
 	/**
-	 * 把java.util.Date类型转为日期字符串
+	 * 把java.utils.Date类型转为日期字符串
 	 */
 	public static String dateToStr(Date date){
 		return dateToStr(date,null);
@@ -215,6 +220,25 @@ public class DateUtil {
 		return c.getTime();
 	}
 
+
+	/**
+	 * 向指定日期添加分钟
+	 * @return
+	 */
+	public static Date addMinuteByDate(Date date,int minute){
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MINUTE, minute);
+		return c.getTime();
+	}
+	/**
+	 * 向当前日期添加分钟
+	 * @return
+	 */
+	public static Date addMinute(int minute){
+		return addMinuteByDate(new Date(),minute);
+	}
+
     
     /**
      * 获取日期的年份
@@ -302,19 +326,6 @@ public class DateUtil {
  		int maxDate = a.get(Calendar.DATE);
  		return maxDate;
  	}
- 	
- 	/**获取当前时间所属的整分钟**/
- 	public static Date getTenMinuteTime(Date date){
- 	   Calendar a = Calendar.getInstance();
- 	   a.setTime(date);
- 	   int minute = a.get(Calendar.MINUTE);
- 	   int minuteY = minute%10;
- 	   a.add(Calendar.MINUTE, 0-minuteY);
- 	   a.set(Calendar.SECOND, 0);
- 	   a.set(Calendar.MILLISECOND, 0);
- 	  return a.getTime();
- 	   
- 	}
     
     /**
      * 指定时间 添加或减少多少天
@@ -332,21 +343,6 @@ public class DateUtil {
          return rightNow.getTime();
     	
     }
-    
-    /**
-     * 指定时间 添加或减少多少分钟
-     * @param date
-     * @param minute
-     * @return
-     */
-    public static Date addMinute(Date date,int minute){
-         Calendar rightNow = Calendar.getInstance();
-         rightNow.setTime(date);
-         rightNow.add(Calendar.MINUTE,minute);//时间加分钟
-         return rightNow.getTime();
-        
-    }
-    
     /**
      * 根据季度解析月份
      * @param quarter 季度
@@ -485,23 +481,31 @@ public class DateUtil {
         return c.getTime();
     }
 
-    /**获取当前时间的凌晨**/
-    public static Date getLingchen(Date timeInit){
-        Calendar a = Calendar.getInstance();
-        a.setTime(timeInit);
-        a.set(Calendar.HOUR_OF_DAY, 0);
-        a.set(Calendar.MINUTE, 0);
-        a.set(Calendar.SECOND, 0);
-        a.set(Calendar.MILLISECOND,0);
-        return a.getTime();
-    }
-    
-    /**获当前时间的小时分钟 HH:mm**/
-    public static String getHourMinute(Date time){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        return dateFormat.format(time);
-    }
-    
+	/**
+	 * 获得指定年份的第一天
+	 * @param date
+	 * @return
+	 */
+	public static Date getYearFirstDay(Date date) {
+		return getYearFirstDay(getYear(date));
+	}
+
+	/**
+	 * 获得指定年份的第一天
+	 * @param year
+	 * @return
+	 */
+	public static Date getYearFirstDay(int year) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+		try {
+			Date date = sdf.parse(year+"");
+			return  DateUtil.getFirstDayOfAddMonthByDate(date, 0);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public static void main(String[] args) {
 		/*Date firstDayOfcurrentMonth = getFirstDayOfCurrentMonth();
 		String str = DateUtil.dateToStr(firstDayOfcurrentMonth);
@@ -516,8 +520,8 @@ public class DateUtil {
 		System.out.println(str);*/
 		/*String str = dateToStr(getLastDayOfMonthByDate(new Date()));
 		System.out.println(str);*/
-//		String str = dateToStr(getFirstDayOfAddMonthByDate(new Date(), 1));
-		System.out.println(getHourMinute(new Date()));
-		System.out.println(addMinute(new Date(),-30));
+		String str = dateToStr(getFirstDayOfAddMonthByDate(new Date(), 1));
+		System.out.println(str);
+
 	}
 }

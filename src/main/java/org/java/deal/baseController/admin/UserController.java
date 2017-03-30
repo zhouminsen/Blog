@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.shiro.SecurityUtils;
 import org.java.base.system.MessageConstant;
 import org.java.base.system.SystemConfig;
