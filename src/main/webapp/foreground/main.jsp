@@ -55,6 +55,7 @@
 				</div>
 				<div class="nickName">${blogger.nickName }</div>
 				<div class="userSign">(${blogger.sign })</div>
+				<a href="${cxt}/admin/login.jsp" target="_blank">进入后台</a>
 			</div>
 			
 			<div class="data_list">

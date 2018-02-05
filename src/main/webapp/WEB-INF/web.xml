@@ -19,7 +19,7 @@
 	<!-- 元素用来设定web应用的环境参数(context) -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/applicationContext.xml</param-value>
+		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
 
 	<!-- Spring配置 Listener 监听 -->
@@ -29,21 +29,21 @@
 	
 	<!-- 初始化系统参数 -->
 	<listener>
-		<listener-class>org.java.base.system.initialize.InitComponent</listener-class>
+		<listener-class>org.zjw.blog.base.system.initialize.InitComponent</listener-class>
 	</listener>
 	
 	
 	<!-- 获得servletAPI start 
 	两种不同初始化方式 需要用到哪一个则注释另一个-->
 	<listener>
-		<listener-class>org.java.base.system.support.ServletAPI</listener-class>
+		<listener-class>org.zjw.blog.base.system.support.ServletAPI</listener-class>
 	</listener>
 	<!-- 获得servletAPI end-->
 	
 	<!-- 单点登录过滤器 -->
 <!-- 	<filter>
 		<filter-name>SSOFilter</filter-name>
-		<filter-class>org.java.base.filter.SSOFilter</filter-class>
+		<filter-clSSOFilterlter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SSOFilter</filter-name>
@@ -90,7 +90,7 @@
 	<!-- 自动登录 start -->
 	<servlet>
 		<servlet-name>autoLoginServlet</servlet-name>
-		<servlet-class>org.java.base.servlet.AutoLoginServlet</servlet-class>
+		<servlet-class>org.zjw.blog.base.servlet.AutoLoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>autoLoginServlet</servlet-name>
@@ -100,7 +100,7 @@
 	
 	<!--  <servlet>
         <servlet-name>ticket</servlet-name>
-        <servlet-class>org.java.base.filter.TicketServlet</servlet-class>
+        <servlet-clTicketServletvlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ticket</servlet-name>
@@ -113,7 +113,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:spring/spring-mvc.xml</param-value>
+			<param-value>classpath:spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported>

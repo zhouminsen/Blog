@@ -185,7 +185,6 @@ function checkForm(){
 			<SPAN class="p_logo">记住我</SPAN>         
 			<INPUT id="remember" name="remember" class="ipt"  type="checkbox" >   
 	  	</P>
-	  	service: <input type="text" name="service"  value="${param.service}"/>
 	  	<!-- 不为空null时创建验证码 -->
 	  	<c:if test="${not empty createCode}">
 	  	<div class="verCode">
