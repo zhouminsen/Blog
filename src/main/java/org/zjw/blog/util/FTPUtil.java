@@ -1,6 +1,9 @@
 package org.zjw.blog.util;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -110,7 +113,6 @@ public class FTPUtil {
     }
 
 
-
     /**
      * 上传文件（可对文件进行重命名）
      *
@@ -178,7 +180,7 @@ public class FTPUtil {
      * @param localpath 下载后的文件路径
      * @return
      */
-    public boolean downloadFile(String filename, String localpath) {
+    public File downloadFile(String filename, String localpath) {
         String hostname = ftpHost;
         int port = ftpPort;
         String username = ftpUserName;
@@ -187,7 +189,7 @@ public class FTPUtil {
         boolean flag = false;
         FTPClient ftpClient = new FTPClient();
         ftpClient.setControlEncoding("UTF-8");
-
+        File file = null;
         try {
             //连接FTP服务器
             ftpClient.connect(hostname, port);
@@ -196,25 +198,33 @@ public class FTPUtil {
             //验证FTP服务器是否登录成功
             int replyCode = ftpClient.getReplyCode();
             if (!FTPReply.isPositiveCompletion(replyCode)) {
-                return flag;
+                return null;
             }
             logger.error("连接FTP成功");
             //切换FTP目录
             ftpClient.changeWorkingDirectory(pathname);
             FTPFile[] ftpFiles = ftpClient.listFiles();
-            for (FTPFile file : ftpFiles) {
-                if (filename.equalsIgnoreCase(file.getName())) {
-                    File localFile = new File(localpath + "/" + file.getName());
-                    OutputStream os = new FileOutputStream(localFile);
-                    ftpClient.retrieveFile(file.getName(), os);
+            for (FTPFile ftpFile : ftpFiles) {
+                if (filename.endsWith("ACOMA")) {
+                    Date time = ftpFile.getTimestamp().getTime();
+                    SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+                    String format = sd.format(time);
+                    String format2 = sd.format(new Date());
+                    if (Objects.equals(format, format2)) {
+                        file = File.createTempFile(ftpFile.getName(), "ACOMA");
+                        OutputStream os = new FileOutputStream(file);
+                        ftpClient.retrieveFile(ftpFile.getName(), os);
+
 //                    ftpClient.retrieveFileStream()
-                    os.close();
-                    logger.info("下载完毕----");
-                    flag = true;
+
+                        os.close();
+                        logger.info("下载完毕----");
+                        flag = true;
+                    }
                 }
             }
             ftpClient.logout();
-
+            return file;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -225,7 +235,7 @@ public class FTPUtil {
                 }
             }
         }
-        return flag;
+        return null;
     }
 
     public boolean downloadFile(String filename, String localpath, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -235,11 +245,12 @@ public class FTPUtil {
 
         //设置响应的文件名称,并转换成中文编码
         //returnName = URLEncoder.encode(returnName,"UTF-8");
-        filename = response.encodeURL(new String(filename.getBytes(),"iso8859-1"));	//保存的文件名,必须和页面编码一致,否则乱码
+        filename = response.encodeURL(new String(filename.getBytes(), "iso8859-1"));    //保存的文件名,必须和页面编码一致,否则乱码
 
         //attachment作为附件下载；inline客户端机器有安装匹配程序，则直接打开；注意改变配置，清除缓存，否则可能不能看到效果
-        response.addHeader("Content-Disposition",   "attachment;filename="+filename);
+        response.addHeader("Content-Disposition", "attachment;filename=" + filename);
 
-        return downloadFile(filename, localpath);
+//        return downloadFile(filename, localpath);
+        return false;
     }
 }

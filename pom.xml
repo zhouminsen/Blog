@@ -5,7 +5,7 @@
     <packaging>war</packaging>
     <name>Blog</name>
     <groupId>zhoujiawei-blog</groupId>
-    <artifactId>Blog</artifactId>
+    <artifactId>blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>

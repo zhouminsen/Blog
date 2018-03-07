@@ -1,11 +1,14 @@
 package org.zjw.blog.File;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.zjw.blog.base.common.test.BaseTest;
 import org.zjw.blog.base.system.UserConstant;
 import org.zjw.blog.deal.download.dao.FileRecordMapper;
 import org.zjw.blog.deal.download.entity.FileRecord;
 import org.zjw.blog.deal.download.service.DownloadService;
 import org.junit.Test;
+import org.zjw.blog.util.FTPUtil;
+import org.zjw.blog.util.file.FileUtil;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -22,6 +25,8 @@ public class DownloadTest extends BaseTest {
 
     @Resource
     private FileRecordMapper fileRecordMapper;
+    @Autowired
+    private FTPUtil ftpUtil;
 
     @Test
     public void add() {
@@ -46,5 +51,10 @@ public class DownloadTest extends BaseTest {
         for (FileRecord fileRecord : list) {
             System.out.println(fileRecord);
         }
+    }
+
+    @Test
+    public void downloadFile() {
+        ftpUtil.downloadFile("haha", "/opt");
     }
 }
