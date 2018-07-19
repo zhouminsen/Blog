@@ -114,6 +114,7 @@
 
 	<!-- 获取Spring的ApplicationContext对象的工具类 -->
 	<bean id="springContextUtil" class="org.zjw.blog.util.SpringContextUtil"></bean>
+
 	<bean id="ftp" class="org.zjw.blog.util.FTPUtil">
 		<property name="FtpHost" value="${ftp.Host}"></property>
 		<property name="FtpPort" value="${ftp.Port}"></property>

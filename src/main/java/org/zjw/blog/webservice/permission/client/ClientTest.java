@@ -31,7 +31,7 @@ public class ClientTest {
 			e.printStackTrace();
 		}
 		System.out.println("我有没有啊" + str);
-		//System.out.println(helloWorld.say("java1234_小锋"));
+		//System.out.println(helloWorld.say("伟哥"));
 		
 		/*User user=new User();
 		user.setUserName("jack");
